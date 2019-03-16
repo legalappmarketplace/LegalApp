@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for case in cases %}
+  <div>
+  <p> {{ case.caseType1 }} </p>
+  <p> {{ case.caseType2 }} </p>
+  <p> {{ case.caseType3 }} </p>
+  <p> {{ case.description }} </p>
+  <br />
+  </div>
+  {% endfor %}
+{% endblock content %}

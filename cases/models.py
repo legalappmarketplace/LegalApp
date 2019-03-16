@@ -5,7 +5,7 @@ from users.models import Client
 
 class Case(models.Model):
     """ Represents Users Cases"""
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
     attorney =  models.ForeignKey(Attorney, on_delete=models.CASCADE,
                                     null=True)
     caseType1 = models.CharField(max_length=250)

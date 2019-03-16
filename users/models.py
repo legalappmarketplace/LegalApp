@@ -6,6 +6,7 @@ class Users(models.Model):
     password = models.CharField(max_length=500)
     firstName = models.CharField(max_length=500)
     lastName = models.CharField(max_length=500)
+    email = models.EmailField()
     birthDate = models.DateField()
 
 class Attorney(models.Model):
