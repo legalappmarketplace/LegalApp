@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="POST" action="">
+    {{form | crispy}}
+  <button type="submit" class="btn btn-success">Uploaded Case</button>
+</form>
+{% endblock content %}
