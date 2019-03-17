@@ -1,14 +1,9 @@
 from .models import Case
 from django import forms
+from utils import ATTRONEY_SPECIALITIES
 
-PUBLISH_CHOICES = (
-    ('personal crime', 'Personal Crimes'),
-    ('property crime', 'Property Crime'),
-    ('inchoate crimes', 'Inchoate Crimes'),
-    ('statutory crimes', 'Statutory Crimes'),
-    ('financial and other crimes', 'Financial and Other Crimes'),
-    ('none', 'None')
-)
+PUBLISH_CHOICES = tuple((speciality.lower(), speciality.title()) for speciality in
+                    ATTRONEY_SPECIALITIES) + tuple(('none', 'None'))
 
 class CaseForm(forms.ModelForm):
     caseType1 = forms.ChoiceField(choices=PUBLISH_CHOICES)

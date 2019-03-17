@@ -2,23 +2,25 @@ from .models import Attorney
 from .models import Client
 from .models import Users
 from django import forms
+from utils import ATTRONEY_SPECIALITIES
 
-PUBLISH_CHOICES = (
-    ('attorney', 'Attorney'),
-    ('client', 'None Attorney')
-)
 YEARS= [x for x in range(1940,2021)]
 
-class RegisterForm(forms.ModelForm):
-    userType = forms.ChoiceField(choices=PUBLISH_CHOICES)
-    # birthDate = forms.DateField(widget=forms.SelectDateWidget(years=YEARS))
-    # firstName = forms.CharField(max_length=500)
-    # lastName = forms.CharField(max_length=500)
-    # birthDate = forms.DateField()
-    # email = forms.EmailField()
-    # username = forms.CharField(max_length=500)
-    # password = forms.CharField(max_length=500)
+PUBLISH_CHOICES = tuple((speciality.lower(), speciality.title()) for speciality in
+                    ATTRONEY_SPECIALITIES) + tuple((('none', 'None'),))
+
+class ClientRegistrationForm(forms.ModelForm):
     class Meta:
         model = Users
         # exclude = ('birthDate',)
-        fields = ['firstName', 'lastName', 'birthDate','email', 'username', 'password']
+        fields = ('firstName', 'lastName', 'birthDate','email', 'username', 'password')
+
+
+class AttorneyRegistrationForm(ClientRegistrationForm):
+    speciality = forms.MultipleChoiceField(
+        required=True,
+        widget=forms.CheckboxSelectMultiple,
+        choices=PUBLISH_CHOICES,
+    )
+    class Meta(ClientRegistrationForm.Meta):
+        fields = ClientRegistrationForm.Meta.fields + ('speciality',)

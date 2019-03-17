@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.urls import path
-from .views import UserRegistration
-
+from .views import ClientRegistration
+from .views import AttorneyRegistration
 urlpatterns = [
     # path('login/', CaseCreateView.as_view(), name='case_create_view'),
-    path('register/', UserRegistration.as_view(), name='registration' ),
+    path('client/register/', ClientRegistration.as_view(), name='client_registration' ),
+    path('attorney/register/', AttorneyRegistration.as_view(), name='client_registration' ),
+
 ]

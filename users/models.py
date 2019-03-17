@@ -14,3 +14,7 @@ class Attorney(models.Model):
 
 class Client(models.Model):
     user = models.ForeignKey('Users', on_delete=models.CASCADE)
+
+class AttroneySpecialities(models.Model):
+    attorney = models.ForeignKey('Attorney', on_delete=models.CASCADE)
+    speciality = models.CharField(max_length=500)
