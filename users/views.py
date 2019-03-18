@@ -78,8 +78,6 @@ class UserLogin(FormView):
     def dispatch(self, request, *args, **kwargs):
         # Sets a test cookie to make sure the user has cookies enabled
         request.session.set_test_cookie()
-        print('i am here')
-
         return super(UserLogin, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -89,8 +87,13 @@ class UserLogin(FormView):
         # delete it since its no longer needed
         if self.request.session.test_cookie_worked():
             self.request.session.delete_test_cookie()
-
         return super(UserLogin, self).form_valid(form)
+
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url # return next url for redirection
+        return self.success_url # return some other url if next parameter not present
 
 class UserLogout(RedirectView):
     """
