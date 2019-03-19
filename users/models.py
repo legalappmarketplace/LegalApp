@@ -1,12 +1,16 @@
+from utils import PASSWORD_ERROR_MESSAGES
+from utils import EMAIL_ERROR_MESSAGES
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
 # Create your models here.
+
+
 class CustomUser(AbstractUser):
-    password = models.CharField(max_length=500)
+    password = models.CharField(max_length=500, unique=True,
+                                           error_messages=PASSWORD_ERROR_MESSAGES)
     firstName = models.CharField(max_length=500, null=True)
     lastName = models.CharField(max_length=500, null=True)
-    email = models.EmailField()
+    email = models.EmailField(unique=True, error_messages=EMAIL_ERROR_MESSAGES)
     birthDate = models.DateField(null=True)
     username = models.CharField(max_length=500, unique=True)
 
