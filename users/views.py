@@ -29,7 +29,7 @@ from django.contrib.auth.hashers import make_password
 class ClientRegistration(CreateView):
     model = CustomUser
     form_class = UserRegistrationForm
-    success_url = '/users/client/register/'
+    success_url = '/users/login'
     template_name = 'users/client_registration.html'
 
 
@@ -48,7 +48,7 @@ class ClientRegistration(CreateView):
 class AttorneyRegistration(CreateView):
         model = CustomUser
         form_class = AttorneyRegistrationForm
-        success_url = '/users/attorney/register/'
+        success_url = '/users/login'
         template_name = 'users/attorney_registration.html'
 
         def form_valid(self, form):

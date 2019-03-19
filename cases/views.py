@@ -49,7 +49,7 @@ class CaseListView(LoginRequiredMixin, ListView):
             return relevant_cases
         return []
 
-    def render_to_response(self, context):
+    def render_to_response(self, contextg):
         attorney = Attorney.objects.filter(user=self.request.user)
         if not attorney.exists():
             return redirect('/')
