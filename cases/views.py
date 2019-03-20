@@ -2,6 +2,7 @@ from .forms import CaseForm
 from .models import Case
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.detail import DetailView
 from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -49,8 +50,11 @@ class CaseListView(LoginRequiredMixin, ListView):
             return relevant_cases
         return []
 
-    def render_to_response(self, contextg):
+    def render_to_response(self, context):
         attorney = Attorney.objects.filter(user=self.request.user)
         if not attorney.exists():
             return redirect('/')
         return super().render_to_response(context)
+
+class CaseDetailView(LoginRequiredMixin, DetailView):
+    model = Case
