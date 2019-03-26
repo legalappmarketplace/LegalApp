@@ -130,3 +130,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+ALLOWED_HOSTS = ['83fac4fe.ngrok.io', 'localhost', '127.0.0.1']

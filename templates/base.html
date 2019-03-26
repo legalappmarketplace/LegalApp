@@ -13,23 +13,30 @@
   </head>
   <body>
   <!-- Top menu -->
-  <nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <nav class="navbar navbar-expand-lg bg-light navbar-light">
     <ul class="nav nav-pills color-me" id="menu">
       <li class="nav-item active">
         <a class="navbar-brand text-secondary text-lg" href="{{ HTTP_HOST }}/">Legal App</a>
       </li>
     </ul>
-    <ul class="nav nav-pills ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ HTTP_HOST }}/users/client/register/">Defendant Registration</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ HTTP_HOST }}/users/attorney/register/">Attorney Registration</a>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="btn btn-primary">Login</button>
-      </li>
-    </ul>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#UserOptions">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="UserOptions">
+      <ul class="navbar-nav nav-pills ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ HTTP_HOST }}/users/client/register/">Client Registration</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ HTTP_HOST }}/users/attorney/register/">Attorney Registration</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ HTTP_HOST }}/users/login/">
+          <button type="button" class="btn btn-primary">Login</button>
+          </a>
+        </li>
+      </ul>
+    </div>
   </nav>
   <div class="container">
     {% block content %}

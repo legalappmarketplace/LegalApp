@@ -1,3 +1,12 @@
 .navbar {
     background-color: #ffffff ! important;
 }
+
+.jumbotron {
+  background-color: #ffffff ! important;
+}
+
+
+.custom {
+    width: 200px !important;
+}

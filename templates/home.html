@@ -2,5 +2,22 @@
 {% load static %}
 
 {% block content %}
-
+<div class="jumbotron  jumbotron-fluid" style="height:100vh;">
+  <div class="container">
+    <h1 class="display-4 text-center">Legal App</h1>
+    <br>
+    <blockquote class="blockquote">
+      <p class="text-center"> Welcome to a market place for Legal Defense Attorneys and Clients.
+         Where Attorneys and Clients bid for fair rates.</p>
+    </blockquote>
+    <div class="row btn-group-lg btn-group-horizontal d-flex justify-content-center">
+      <a class="nav-link" href="{{ HTTP_HOST }}/users/client/register/">
+        <button type="button" class="btn btn-primary btn-block custom">Find an Attorney</button>
+      </a>
+      <a class="nav-link" href="{{ HTTP_HOST }}/users/client/register/">
+        <button type="button" class="btn btn-primary btn-block custom">Find a Client</button>
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}
