@@ -5,6 +5,7 @@ from .models import Client
 from .models import AttroneySpecialities
 from .models import CustomUser
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -94,6 +95,11 @@ class UserLogin(FormView):
         if next_url:
             return next_url # return next url for redirection
         return self.success_url # return some other url if next parameter not present
+
+    def render_to_response(self, context):
+        if self.request.user.is_authenticated:
+            return redirect('/')
+        return super().render_to_response(context)
 
 class UserLogout(RedirectView):
     """
