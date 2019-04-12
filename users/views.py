@@ -70,7 +70,7 @@ class AttorneyRegistration(CreateView):
 class UserLogin(FormView):
     form_class = AuthenticationForm
     template_name = 'users/client_login.html'
-    success_url = '/'
+    success_url = '/cases/user/cases/'
 
     @method_decorator(sensitive_post_parameters('password'))
     @method_decorator(csrf_protect)

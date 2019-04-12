@@ -1,6 +1,7 @@
 from .forms import CaseForm
 from users.models import Attorney
 from users.models import AttroneySpecialities
+from users.models import CustomUser
 from .models import Case
 from .models import Client
 from django.contrib.auth.decorators import login_required
@@ -16,16 +17,24 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 # Create your views here.
 
-class CaseCreateView(CreateView):
+class CaseCreateView(LoginRequiredMixin, CreateView):
     model = Case
     template_name = 'cases/create_case_form.html'
     form_class = CaseForm
-    success_url = '/cases/upload'
+    success_url = '/cases/user/cases'
 
     def form_valid(self, form):
         user = self.request.user
         form.instance.user = user
+        if user.is_authenticated:
+            self.object = form.save()
+            user = CustomUser.objects.filter(email=user)[0]
+            client = Client.objects.filter(user=user)[0]
+            print(user, client)
+            self.object.client = client
+            self.object.save()
         return super(CaseCreateView, self).form_valid(form)
+
 
 class CaseListView(LoginRequiredMixin, ListView):
     model = Case
