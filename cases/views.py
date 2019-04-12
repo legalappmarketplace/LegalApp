@@ -22,6 +22,7 @@ class CaseCreateView(LoginRequiredMixin, CreateView):
     template_name = 'cases/create_case_form.html'
     form_class = CaseForm
     success_url = '/cases/user/cases'
+    login_url = '/users/login/'
 
     def form_valid(self, form):
         user = self.request.user
