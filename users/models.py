@@ -13,6 +13,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True, error_messages=EMAIL_ERROR_MESSAGES)
     birthDate = models.DateField(null=True)
     username = models.CharField(max_length=500, unique=True)
+    about = models.TextField(null=True)
 
     def __str__(self):
         return self.email

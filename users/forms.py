@@ -27,5 +27,6 @@ class AttorneyRegistrationForm(UserRegistrationForm):
         widget=forms.CheckboxSelectMultiple,
         choices=PUBLISH_CHOICES,
     )
+    # about = forms.Textarea()
     class Meta(UserRegistrationForm.Meta):
-        fields = UserRegistrationForm.Meta.fields + ('speciality',)
+        fields = UserRegistrationForm.Meta.fields + ( 'about', 'speciality',)

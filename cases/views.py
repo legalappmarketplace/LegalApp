@@ -1,5 +1,8 @@
 from .forms import CaseForm
+from users.models import Attorney
+from users.models import AttroneySpecialities
 from .models import Case
+from .models import Client
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
@@ -11,8 +14,6 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
-from users.models import Attorney
-from users.models import AttroneySpecialities
 # Create your views here.
 
 class CaseCreateView(CreateView):
@@ -58,3 +59,16 @@ class CaseListView(LoginRequiredMixin, ListView):
 
 class CaseDetailView(LoginRequiredMixin, DetailView):
     model = Case
+
+class UsersCases(LoginRequiredMixin, ListView):
+        model = Case
+        template_name = 'cases/user_cases_list_view.html'
+        context_object_name = 'cases'
+        login_url = '/users/login/'
+
+        def get_queryset(self):
+            client = Client.objects.filter(user=self.request.user)
+            if client.exists():
+                client = client[0]
+                return Case.objects.filter(client=client)
+            return []

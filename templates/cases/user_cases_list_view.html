@@ -1,0 +1,12 @@
+{% block content %}
+  {% for case in cases %}
+  <div>
+  <p> {{ case.caseType1 }} </p>
+  <p> {{ case.caseType2 }} </p>
+  <p> {{ case.caseType3 }} </p>
+  <p> {{ case.description }} </p>
+  <a href="{{ HTTP_HOST }}/cases/case/{{case.id}}">See Full Case</a>
+  <br />
+  </div>
+  {% endfor %}
+{% endblock content %}
