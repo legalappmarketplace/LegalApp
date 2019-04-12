@@ -82,3 +82,9 @@ class UsersCases(LoginRequiredMixin, ListView):
                 client = client[0]
                 return Case.objects.filter(client=client)
             return []
+
+        def render_to_response(self, context):
+            client = Client.objects.filter(user=self.request.user)
+            if not client.exists():
+                return redirect('/')
+            return super().render_to_response(context)
