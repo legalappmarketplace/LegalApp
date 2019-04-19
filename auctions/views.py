@@ -5,6 +5,7 @@ from users.models import CustomUser
 from cases.models import Case
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
@@ -42,3 +43,9 @@ class AttorneyBidView(LoginRequiredMixin, FormMixin, DetailView):
         )
         bid.save()
         return super(AttorneyBidView, self).form_valid(form)
+
+    def render_to_response(self, context):
+        attorney = Attorney.objects.filter(user=self.request.user)
+        if not attorney.exists():
+            return redirect('/')
+        return super().render_to_response(context)
