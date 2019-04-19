@@ -23,4 +23,5 @@ urlpatterns = [
     path('cases/', include('cases.urls')),
     path('', HomeView.as_view(), ),
     path('users/', include('users.urls')),
+    path('auctions/', include('auctions.urls')),
 ]

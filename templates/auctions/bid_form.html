@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Bid Form</h2>
+
+<div>
+<p> {{ object.caseType1 }} </p>
+<p> {{ object.caseType2 }} </p>
+<p> {{ object.caseType3 }} </p>
+<p> {{ object.description }} </p>
+<br />
+</div>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form | crispy}}
+  <button type="submit" class="btn btn-outline-primary">Place Bid</button>
+</form>
+{% endblock %}
