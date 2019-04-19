@@ -13,6 +13,6 @@ class Bid(models.Model):
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     attorney = models.ForeignKey(Attorney, on_delete=models.CASCADE)
-    counterBid = models.BooleanField()
+    counterBid = models.BooleanField(null=True)
     previousBid = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
     bidAccepted = models.BooleanField(null=True)

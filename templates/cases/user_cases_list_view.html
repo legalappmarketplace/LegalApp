@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 {% block content %}
   {% for case in cases %}
   <div>
@@ -5,7 +6,6 @@
   <p> {{ case.caseType2 }} </p>
   <p> {{ case.caseType3 }} </p>
   <p> {{ case.description }} </p>
-  <a href="/auctions/attorney/bid/view/{{case.id}}">See Full Case</a>
   <br />
   </div>
   {% endfor %}

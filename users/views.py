@@ -83,7 +83,6 @@ class UserLogin(FormView):
 
     def form_valid(self, form):
         auth_login(self.request, form.get_user())
-        print(form.data)
         # If the test cookie worked, go ahead and
         # delete it since its no longer needed
         if self.request.session.test_cookie_worked():
