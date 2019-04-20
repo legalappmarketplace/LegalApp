@@ -1,6 +1,8 @@
 from .forms import AttorneyBidForm
+from .forms import ClientBidForm
 from .models import Bid
 from users.models import Attorney
+from users.models import Client
 from users.models import CustomUser
 from cases.models import Case
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,7 +17,7 @@ from django.views.generic.edit import FormMixin
 class AttorneyBidView(LoginRequiredMixin, FormMixin, DetailView):
     """Attorney Place Bids"""
     model = Case
-    template_name = 'auctions/bid_form.html'
+    template_name = 'auctions/attorney_bid_form.html'
     form_class = AttorneyBidForm
     success_url = '/'
     login_url = '/users/login/'
@@ -47,5 +49,19 @@ class AttorneyBidView(LoginRequiredMixin, FormMixin, DetailView):
     def render_to_response(self, context):
         attorney = Attorney.objects.filter(user=self.request.user)
         if not attorney.exists():
+            return redirect('/')
+        return super().render_to_response(context)
+
+class ClientBidView(LoginRequiredMixin, FormMixin, DetailView):
+    """Clients Place Counter Bids"""
+    model = Case
+    template_name = 'auctions/client_bid_form.html'
+    form_class = ClientBidForm
+    success_url = '/'
+    login_url = '/users/login/'
+
+    def render_to_response(self, context):
+        client = Client.objects.filter(user=self.request.user)
+        if not client.exists():
             return redirect('/')
         return super().render_to_response(context)

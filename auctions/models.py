@@ -1,4 +1,5 @@
 from django.db import models
+from cases.models import Case
 from users.models import Attorney
 from users.models import Client
 from users.models import CustomUser
@@ -16,3 +17,4 @@ class Bid(models.Model):
     counterBid = models.BooleanField(null=True)
     previousBid = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
     bidAccepted = models.BooleanField(null=True)
+    case = models.ForeignKey(Case, on_delete=models.CASCADE)

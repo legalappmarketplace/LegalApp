@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cases',
     'users',
     'auctions',
+    'templatetags'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -70,6 +71,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+            'filter': 'templatetags.filter',
+            }
         },
     },
 ]

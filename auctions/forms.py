@@ -6,4 +6,7 @@ class AttorneyBidForm(forms.ModelForm):
     class Meta:
         model = Bid
         exclude = ('previousBid', 'counterBid', 'bidAccepted', 'attorney',
-                   'client', 'buyer', 'bidder')
+                   'client', 'buyer', 'bidder', 'case')
+
+class ClientBidForm(AttorneyBidForm):
+    """Client Bid Form"""
