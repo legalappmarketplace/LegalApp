@@ -1,5 +1,6 @@
 ATTRONEY_SPECIALITIES = ['personal crimes', 'property crime', 'inchoate crimes',
                          'statutory crimes', 'financial and other crimes']
+BID_RESPONSES = ['Accept', 'CounterOffer', 'Deny']
 PASSWORD_ERROR_MESSAGES = {'blank': 'Password Field cannot be blank',
                            'null': 'Password must not be null',
                            'invalid': 'Must choose a valid password',

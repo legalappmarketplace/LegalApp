@@ -23,7 +23,6 @@ def findPendingBids(caseID):
 def getAttorneyName(caseID):
     bid = Bid.objects.filter(case=caseID)
     if bid:
-        print(bid[0].attorney)
         attorneyName = bid[0].attorney.user.username
         return attorneyName
     return None

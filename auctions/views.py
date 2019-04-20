@@ -32,7 +32,6 @@ class AttorneyBidView(LoginRequiredMixin, FormMixin, DetailView):
         else:
             return self.form_invalid(form)
 
-
     def form_valid(self, form, *args, **kwargs):
         client = Case.objects.filter(id=self.kwargs['pk'])[0].client
         buyer = client.user
@@ -48,7 +47,7 @@ class AttorneyBidView(LoginRequiredMixin, FormMixin, DetailView):
 
     def render_to_response(self, context):
         attorney = Attorney.objects.filter(user=self.request.user)
-        if not attorney.exists():
+        if not attorney:
             return redirect('/')
         return super().render_to_response(context)
 
@@ -62,6 +61,38 @@ class ClientBidView(LoginRequiredMixin, FormMixin, DetailView):
 
     def render_to_response(self, context):
         client = Client.objects.filter(user=self.request.user)
-        if not client.exists():
+        if not client:
             return redirect('/')
         return super().render_to_response(context)
+
+    def form_valid(self, form, *args, **kwargs):
+        form = self.get_form()
+        clientResponse = form.data['bid_responses']
+        if clientResponse == 'accept':
+            print('client accepted')
+        elif clientResponse == 'counteroffer':
+            print('client counteroffer')
+        elif clientResponse == 'deny':
+            print('client deny')
+
+        # client = Case.objects.filter(id=self.kwargs['pk'])[0].client
+        # buyer = client.user
+        # bid = Bid(
+        #             bidder = self.request.user,
+        #             buyer = buyer,
+        #             amount = form.data['amount'],
+        #             client = client,
+        #             attorney = Attorney.objects.filter(user=self.request.user)[0],
+        # )
+        # bid.save()
+        # return super(AttorneyBidView, self).form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
